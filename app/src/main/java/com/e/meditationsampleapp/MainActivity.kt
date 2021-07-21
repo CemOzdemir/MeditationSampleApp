@@ -2,7 +2,7 @@ package com.e.meditationsampleapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.e.meditationsampleapp.ui.main.LoginFragment
+import com.e.meditationsampleapp.features.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 

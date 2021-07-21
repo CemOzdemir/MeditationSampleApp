@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Meditation Sample App</string>
+    <string name="login_title">Sign in to Meditopia</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="continue_button">Continue</string>
+    <string name="ok">OK</string>
+    <string name="username_length_error">Username must contain at least 3 characters.</string>
+    <string name="password_digit_error">\nYour password must contain at least 1 digit.</string>
+    <string name="password_uppercase_error">\nYour password must contain at least 1 uppercase character.</string>
+    <string name="password_length_error">\nYour password must contain at least 6 characters.</string>
 </resources>
