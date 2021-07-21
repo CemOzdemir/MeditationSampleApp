@@ -2,7 +2,7 @@ package com.e.meditationsampleapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.e.meditationsampleapp.ui.main.MainFragment
+import com.e.meditationsampleapp.ui.main.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, LoginFragment.newInstance())
                     .commitNow()
         }
     }

@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.e.meditationsampleapp.R
 
-class MainFragment : Fragment() {
+class LoginFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = LoginFragment()
     }
 
     private lateinit var viewModel: MainViewModel
@@ -21,10 +21,8 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
     }
-
 }
