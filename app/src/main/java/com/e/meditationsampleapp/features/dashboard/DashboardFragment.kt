@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.AdapterListUpdateCallback
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.meditationsampleapp.R
 import com.e.meditationsampleapp.databinding.DashboardFragmentBinding
 
@@ -14,6 +16,8 @@ class DashboardFragment : Fragment() {
 
     private lateinit var viewModel: DashboardViewModel
     private lateinit var binding: DashboardFragmentBinding
+
+    private val meditationListAdapter = MeditationListAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +31,26 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        binding.viewModel = viewModel
+
+        setViewProperties()
+        observeViewModel()
+
         viewModel.getDashboardData()
+    }
+
+    private fun setViewProperties() {
+        binding.viewModel = viewModel
+
+        binding.meditationList.run {
+            adapter = meditationListAdapter
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.run {
+            submitListToAdapterLiveData.observe(viewLifecycleOwner, { list ->
+                list?.let { meditationListAdapter.submitList(ArrayList(list)) }
+            })
+        }
     }
 }
