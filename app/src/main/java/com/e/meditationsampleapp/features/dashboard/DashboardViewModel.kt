@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.e.meditationsampleapp.base.repository.MeditationSampleApiService
+import com.e.meditationsampleapp.component.banner.BannerData
 import com.e.meditationsampleapp.component.tile.TileData
 import com.e.meditationsampleapp.model.DashboardResponse
 import com.e.meditationsampleapp.model.MeditationModel

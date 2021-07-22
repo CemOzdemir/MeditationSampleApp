@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.meditationsampleapp.R
+import com.e.meditationsampleapp.component.banner.BannerData
+import com.e.meditationsampleapp.component.banner.setData
 import com.e.meditationsampleapp.databinding.DashboardFragmentBinding
 
 class DashboardFragment : Fragment() {
@@ -39,10 +41,10 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setViewProperties() {
-        binding.viewModel = viewModel
-
-        binding.meditationList.run {
-            adapter = meditationListAdapter
+        binding.run {
+            viewModel = viewModel
+            meditationList.adapter = meditationListAdapter
+            banner.setData(BannerData(getString(R.string.banner_description)))
         }
     }
 

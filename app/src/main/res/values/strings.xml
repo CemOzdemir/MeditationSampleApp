@@ -9,6 +9,6 @@
     <string name="password_digit_error">\nYour password must contain at least 1 digit.</string>
     <string name="password_uppercase_error">\nYour password must contain at least 1 uppercase character.</string>
     <string name="password_length_error">\nYour password must contain at least 6 characters.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="meditation_list_title">Meditations</string>
+    <string name="banner_description">Look. Pretty, isn’t it?\nPerfectly balanced. As all things should be.</string>
 </resources>
