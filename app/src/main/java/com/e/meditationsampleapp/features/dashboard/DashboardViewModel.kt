@@ -10,6 +10,7 @@ import com.e.meditationsampleapp.component.banner.BannerData
 import com.e.meditationsampleapp.component.tile.TileData
 import com.e.meditationsampleapp.model.DashboardResponse
 import com.e.meditationsampleapp.model.MeditationModel
+import com.e.meditationsampleapp.model.StoryModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -19,11 +20,13 @@ class DashboardViewModel : ViewModel() {
     private var disposable = CompositeDisposable()
     private var apiService = MeditationSampleApiService()
 
-    private val submitListToAdapter = MutableLiveData<List<MeditationModel>>()
-    val submitListToAdapterLiveData: LiveData<List<MeditationModel>> get() = submitListToAdapter
+    private val submitListToMeditationsAdapter = MutableLiveData<List<MeditationModel>>()
+    val submitListToMeditationsAdapterLiveData: LiveData<List<MeditationModel>> get() = submitListToMeditationsAdapter
+
+    private val submitListToStoriesAdapter = MutableLiveData<List<StoryModel>>()
+    val submitListToStoriesAdapterLiveData: LiveData<List<StoryModel>> get() = submitListToStoriesAdapter
 
     val progressBarVisibilityObservable = ObservableBoolean(false)
-    val tileDataObservable = ObservableField<TileData>()
 
     fun getDashboardData() {
         progressBarVisibilityObservable.set(true)
@@ -46,7 +49,10 @@ class DashboardViewModel : ViewModel() {
 
     fun handleDashboardData(dashboardResponse: DashboardResponse) {
         dashboardResponse.meditations?.run {
-            submitListToAdapter.value = this
+            submitListToMeditationsAdapter.value = this
+        }
+        dashboardResponse.stories?.run {
+            submitListToStoriesAdapter.value = this
         }
     }
 }

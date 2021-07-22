@@ -20,6 +20,7 @@ class DashboardFragment : Fragment() {
     private lateinit var binding: DashboardFragmentBinding
 
     private val meditationListAdapter = MeditationListAdapter(arrayListOf())
+    private val storiesListAdapter = StoryListAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +45,18 @@ class DashboardFragment : Fragment() {
         binding.run {
             viewModel = viewModel
             meditationList.adapter = meditationListAdapter
+            storyList.adapter = storiesListAdapter
             banner.setData(BannerData(getString(R.string.banner_description)))
         }
     }
 
     private fun observeViewModel() {
         viewModel.run {
-            submitListToAdapterLiveData.observe(viewLifecycleOwner, { list ->
+            submitListToMeditationsAdapterLiveData.observe(viewLifecycleOwner, { list ->
                 list?.let { meditationListAdapter.submitList(ArrayList(list)) }
+            })
+            submitListToStoriesAdapterLiveData.observe(viewLifecycleOwner, { list ->
+                list?.let { storiesListAdapter.submitList(ArrayList(list)) }
             })
         }
     }
