@@ -8,18 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.e.meditationsampleapp.R
 import com.e.meditationsampleapp.databinding.LoginFragmentBinding
 import com.e.meditationsampleapp.features.dashboard.DashboardViewModel
+
+private const val MIN_USERNAME_LENGTH = 3
+private const val MIN_PASSWORD_LENGTH = 3
+private const val REGEX_AT_LEAST_ONE_UPPERCASE = "(?=.*\\d)"
+private const val REGEX_AT_LEAST_ONE_DIGIT = "(?=.*\\d)"
 
 class LoginFragment : Fragment() {
 
     companion object {
         fun newInstance() = LoginFragment()
-        private const val MIN_USERNAME_LENGTH = 3
-        private const val MIN_PASSWORD_LENGTH = 3
-        private const val REGEX_AT_LEAST_ONE_UPPERCASE = "(?=.*\\d)"
-        private const val REGEX_AT_LEAST_ONE_DIGIT = "(?=.*\\d)"
     }
 
     private lateinit var viewModel: DashboardViewModel
@@ -39,9 +43,10 @@ class LoginFragment : Fragment() {
 
         binding.run {
             continueButton.setOnClickListener {
-                if (isInputValid(usernameInput.text?.toString().orEmpty(), passwordInput.text?.toString().orEmpty())) {
-                    // todo: navigate
-
+//                if (isInputValid(usernameInput.text?.toString().orEmpty(), passwordInput.text?.toString().orEmpty())) {
+                if (true) {
+                    val action = LoginFragmentDirections.actionLoginFragmentToDashboardFragment()
+                    this@LoginFragment.findNavController().navigate(action)
                 } else {
                     showRegexError()
                 }
