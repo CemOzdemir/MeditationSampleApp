@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_nav_graph"
     app:startDestination="@id/loginFragment">
 
@@ -15,5 +16,14 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.e.meditationsampleapp.features.dashboard.DashboardFragment"
-        android:label="DashboardFragment" />
+        android:label="DashboardFragment" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_mediaDetailFragment"
+            app:destination="@id/mediaDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mediaDetailFragment"
+        android:name="com.e.meditationsampleapp.features.mediadetail.MediaDetailFragment"
+        android:label="media_detail_fragment"
+        tools:layout="@layout/media_detail_fragment" />
 </navigation>

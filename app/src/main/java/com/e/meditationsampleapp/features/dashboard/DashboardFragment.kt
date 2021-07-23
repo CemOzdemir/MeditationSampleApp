@@ -1,18 +1,23 @@
 package com.e.meditationsampleapp.features.dashboard
 
+import android.R.attr.*
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.AdapterListUpdateCallback
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.e.meditationsampleapp.R
+import com.e.meditationsampleapp.base.CommonItemSpaceDecoration
+import com.e.meditationsampleapp.base.px
 import com.e.meditationsampleapp.component.banner.BannerData
 import com.e.meditationsampleapp.component.banner.setData
 import com.e.meditationsampleapp.databinding.DashboardFragmentBinding
+
+private const val GRID_ITEM_HORIZONTAL_SPACE_DP = 12
+private const val GRID_ITEM_VERTICAL_SPACE_DP = 24
 
 class DashboardFragment : Fragment() {
 
@@ -43,9 +48,15 @@ class DashboardFragment : Fragment() {
 
     private fun setViewProperties() {
         binding.run {
-            viewModel = viewModel
+            viewModel = this@DashboardFragment.viewModel
             meditationList.adapter = meditationListAdapter
             storyList.adapter = storiesListAdapter
+            storyList.addItemDecoration(
+                CommonItemSpaceDecoration(
+                    GRID_ITEM_HORIZONTAL_SPACE_DP.px,
+                    GRID_ITEM_VERTICAL_SPACE_DP.px
+                )
+            )
             banner.setData(BannerData(getString(R.string.banner_description)))
         }
     }

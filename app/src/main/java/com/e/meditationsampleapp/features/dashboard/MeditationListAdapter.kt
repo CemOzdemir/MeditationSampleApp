@@ -30,7 +30,7 @@ class MeditationListAdapter(private var meditationList: ArrayList<MeditationMode
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeditationViewHolder =
-        MeditationViewHolder(ItemMeditationBinding.inflate(LayoutInflater.from(parent.context)))
+        MeditationViewHolder(ItemMeditationBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: MeditationViewHolder, position: Int) = holder.bind(meditationList[position])
 

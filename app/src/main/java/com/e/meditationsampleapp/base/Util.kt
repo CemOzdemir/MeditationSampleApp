@@ -1,5 +1,6 @@
 package com.e.meditationsampleapp.base
 
+import android.content.res.Resources
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -26,6 +27,9 @@ fun loadImageView(view: ImageView, url: String?) {
 }
 
 @BindingAdapter("android:visibility")
-fun changeVisibility(view: View, visibility: Boolean) {
-    view.visibility = if (visibility) View.VISIBLE else View.GONE
+fun changeVisibility(view: View, visibility: Boolean?) {
+    view.visibility = if (visibility == true) View.VISIBLE else View.GONE
 }
+
+val Int.px: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()

@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.e.meditationsampleapp.features.dashboard.DashboardViewModel" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,6 +41,7 @@
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold"
+                android:visibility="@{viewModel.meditationsVisibilityObservable}"
                 app:layout_constraintBottom_toTopOf="@id/meditation_list"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="48dp"
+                android:visibility="@{viewModel.bannerVisibilityObservable}"
                 app:layout_constraintBottom_toTopOf="@id/stories_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +83,7 @@
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold"
+                android:visibility="@{viewModel.storiesVisibilityObservable}"
                 app:layout_constraintBottom_toTopOf="@id/story_list"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/banner" />
@@ -96,12 +107,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.e.meditationsampleapp.features.dashboard.DashboardViewModel" />
-    </data>
-
 </layout>

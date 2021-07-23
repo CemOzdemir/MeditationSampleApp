@@ -30,7 +30,7 @@ class StoryListAdapter(private var storyList: ArrayList<StoryModel>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder =
-        StoryViewHolder(ItemStoryBinding.inflate(LayoutInflater.from(parent.context)))
+        StoryViewHolder(ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) = holder.bind(storyList[position])
 

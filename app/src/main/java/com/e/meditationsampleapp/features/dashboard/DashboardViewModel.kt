@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers
 class DashboardViewModel : ViewModel() {
     private var disposable = CompositeDisposable()
     private var apiService = MeditationSampleApiService()
+    var dashboardData: DashboardResponse? = null
 
     private val submitListToMeditationsAdapter = MutableLiveData<List<MeditationModel>>()
     val submitListToMeditationsAdapterLiveData: LiveData<List<MeditationModel>> get() = submitListToMeditationsAdapter
@@ -26,7 +27,10 @@ class DashboardViewModel : ViewModel() {
     private val submitListToStoriesAdapter = MutableLiveData<List<StoryModel>>()
     val submitListToStoriesAdapterLiveData: LiveData<List<StoryModel>> get() = submitListToStoriesAdapter
 
-    val progressBarVisibilityObservable = ObservableBoolean(false)
+    val progressBarVisibilityObservable = ObservableBoolean()
+    val bannerVisibilityObservable = ObservableBoolean()
+    val storiesVisibilityObservable = ObservableBoolean()
+    val meditationsVisibilityObservable = ObservableBoolean()
 
     fun getDashboardData() {
         progressBarVisibilityObservable.set(true)
@@ -48,11 +52,13 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun handleDashboardData(dashboardResponse: DashboardResponse) {
-        dashboardResponse.meditations?.run {
-            submitListToMeditationsAdapter.value = this
-        }
-        dashboardResponse.stories?.run {
-            submitListToStoriesAdapter.value = this
+        dashboardData = dashboardResponse
+        dashboardResponse.run {
+            isBannerEnabled?.let { bannerVisibilityObservable.set(it) }
+            meditations?.let {submitListToMeditationsAdapter.value = it }
+            meditationsVisibilityObservable.set(meditations?.isNotEmpty() == true)
+            stories?.let { submitListToStoriesAdapter.value = it }
+            storiesVisibilityObservable.set(stories?.isNotEmpty() == true)
         }
     }
 }

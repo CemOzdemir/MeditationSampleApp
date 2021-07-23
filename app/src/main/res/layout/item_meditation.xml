@@ -4,8 +4,8 @@
 
     <com.e.meditationsampleapp.component.tile.TileView
         android:id="@+id/tile_view"
-        android:layout_width="match_parent"
+        android:layout_width="156dp"
         android:layout_height="wrap_content"
-        android:paddingEnd="24dp"
+        android:paddingEnd="12dp"
         tools:ignore="RtlSymmetry" />
 </layout>
