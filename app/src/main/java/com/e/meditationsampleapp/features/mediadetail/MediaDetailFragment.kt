@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.e.meditationsampleapp.R
-import com.e.meditationsampleapp.databinding.DashboardFragmentBinding
 import com.e.meditationsampleapp.databinding.MediaDetailFragmentBinding
 import com.e.meditationsampleapp.features.dashboard.DashboardViewModel
 
@@ -35,5 +35,15 @@ class MediaDetailFragment : Fragment() {
         if (viewModel.dashboardData != null) {
             viewModel.getDashboardData()
         }
+    }
+
+    override fun onPause() {
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        (activity as? AppCompatActivity)?.supportActionBar?.show()
+        super.onResume()
     }
 }

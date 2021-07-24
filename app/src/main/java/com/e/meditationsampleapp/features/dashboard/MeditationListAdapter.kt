@@ -2,6 +2,7 @@ package com.e.meditationsampleapp.features.dashboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.e.meditationsampleapp.component.tile.TileData
 import com.e.meditationsampleapp.component.tile.setData
@@ -22,8 +23,8 @@ class MeditationListAdapter(private var meditationList: ArrayList<MeditationMode
                     )
                 )
                 tileView.setOnClickListener {
-//                    val action = MovieListFragmentDirections.actionToMovieDetailFragment(movieItem)
-//                    Navigation.findNavController(it).navigate(action)
+                    val action = DashboardFragmentDirections.actionDashboardFragmentToMediaDetailFragment()
+                    Navigation.findNavController(it).navigate(action)
                 }
             }
         }

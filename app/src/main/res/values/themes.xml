@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MeditationSampleApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.MeditationSampleApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#2C74F4</item>
         <item name="colorPrimaryVariant">#2C74F4</item>
@@ -11,6 +11,10 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
-        <!-- Customize your theme here. -->
+        <item name="actionBarTheme">@style/BlackActionBar</item>
+    </style>
+
+    <style name="BlackActionBar" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:background">@color/black</item>
     </style>
 </resources>
