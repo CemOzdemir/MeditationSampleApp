@@ -11,5 +11,6 @@
     <string name="password_length_error">\nYour password must contain at least 6 characters.</string>
     <string name="meditation_list_title">Meditations</string>
     <string name="story_list_title">Stories</string>
-    <string name="banner_description">Look. Pretty, isn’t it?\nPerfectly balanced. As all things should be.</string>
+    <string name="banner_description">Look %1$s. Pretty, isn’t it?\nPerfectly balanced. As all things should be.</string>
+    <string name="username_key">username</string>
 </resources>

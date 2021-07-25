@@ -1,7 +1,7 @@
 package com.e.meditationsampleapp.features.dashboard
 
 import android.R.attr.*
-import android.os.Build
+import android.content.Context
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -82,7 +82,7 @@ class DashboardFragment : Fragment() {
                     GRID_ITEM_VERTICAL_SPACE_DP.px
                 )
             )
-            banner.setData(BannerData(getString(R.string.banner_description)))
+            banner.setData(BannerData(getBannerText()))
         }
     }
 
@@ -95,6 +95,13 @@ class DashboardFragment : Fragment() {
                 list?.let { storiesListAdapter.submitList(ArrayList(list)) }
             })
         }
+    }
+
+    private fun getBannerText(): String {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val userName = sharedPref?.getString(getString(R.string.username_key), "")
+
+        return getString(R.string.banner_description, userName?.replaceFirstChar { it.uppercase() })
     }
 
     private fun getFormattedDate(date: String?) = if (date?.isNotBlank() == true) {

@@ -1,5 +1,6 @@
 package com.e.meditationsampleapp.features.login
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.e.meditationsampleapp.R
 import com.e.meditationsampleapp.databinding.LoginFragmentBinding
@@ -40,11 +39,11 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-
         binding.run {
             continueButton.setOnClickListener {
 //                if (isInputValid(usernameInput.text?.toString().orEmpty(), passwordInput.text?.toString().orEmpty())) {
                 if (true) {
+                    saveUsername()
                     val action = LoginFragmentDirections.actionLoginFragmentToDashboardFragment()
                     this@LoginFragment.findNavController().navigate(action)
                 } else {
@@ -84,5 +83,13 @@ class LoginFragment : Fragment() {
         if (!password.contains(Regex(REGEX_AT_LEAST_ONE_DIGIT))) errorText += getString(R.string.password_digit_error)
         if (!password.contains(Regex(REGEX_AT_LEAST_ONE_UPPERCASE))) errorText += getString(R.string.password_uppercase_error)
         return errorText
+    }
+
+    private fun saveUsername() {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString(getString(R.string.username_key), binding.usernameInput.text.toString())
+            apply()
+        }
     }
 }
