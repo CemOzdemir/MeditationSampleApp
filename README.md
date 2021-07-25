@@ -11,6 +11,7 @@ Components
 - BannerView
 
 Lang = Kotlin
+
 Architecture = MVVM
 
 Libraries
