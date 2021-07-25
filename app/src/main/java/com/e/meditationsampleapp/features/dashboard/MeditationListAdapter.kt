@@ -9,10 +9,16 @@ import com.e.meditationsampleapp.component.tile.setData
 import com.e.meditationsampleapp.databinding.ItemMeditationBinding
 import com.e.meditationsampleapp.model.MeditationModel
 
-class MeditationListAdapter(private var meditationList: ArrayList<MeditationModel>):
+class MeditationListAdapter(
+    private var meditationList: ArrayList<MeditationModel>,
+    private var itemSelectedListener: ItemSelectListener
+) :
     RecyclerView.Adapter<MeditationListAdapter.MeditationViewHolder>() {
 
-    class MeditationViewHolder(private val binding: ItemMeditationBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MeditationViewHolder(
+        private val binding: ItemMeditationBinding,
+        private val itemSelectedListener: ItemSelectListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(meditationModel: MeditationModel) {
             binding.run {
                 tileView.setData(
@@ -23,6 +29,7 @@ class MeditationListAdapter(private var meditationList: ArrayList<MeditationMode
                     )
                 )
                 tileView.setOnClickListener {
+                    itemSelectedListener.onMeditationSelected(meditationModel)
                     val action = DashboardFragmentDirections.actionDashboardFragmentToMediaDetailFragment()
                     Navigation.findNavController(it).navigate(action)
                 }
@@ -31,13 +38,19 @@ class MeditationListAdapter(private var meditationList: ArrayList<MeditationMode
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeditationViewHolder =
-        MeditationViewHolder(ItemMeditationBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        MeditationViewHolder(
+            ItemMeditationBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            itemSelectedListener)
 
     override fun onBindViewHolder(holder: MeditationViewHolder, position: Int) = holder.bind(meditationList[position])
 
     fun submitList(list: ArrayList<MeditationModel>) {
         this.meditationList = list
         notifyDataSetChanged()
+    }
+
+    fun setItemSelectedListener(itemSelectedListener: ItemSelectListener) {
+        this.itemSelectedListener = itemSelectedListener
     }
 
     override fun getItemCount() = meditationList.size

@@ -16,10 +16,16 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * Hem Dashboard'da hem de detayda kullanmak üzere oluşturulan ViewModel.
+ *
+ * İkisine ayrı ayrı ViewModel oluşturulup, iki fragment arası data paslanabilirdi ancak
+ * şu andaki kullanıma uygun olduğunu düşündüğüm ve denemek istediğim için ortak kullanımı
+ * tercih ettim.
+ */
 class DashboardViewModel : ViewModel() {
     private var disposable = CompositeDisposable()
     private var apiService = MeditationSampleApiService()
-    var dashboardData: DashboardResponse? = null
 
     private val submitListToMeditationsAdapter = MutableLiveData<List<MeditationModel>>()
     val submitListToMeditationsAdapterLiveData: LiveData<List<MeditationModel>> get() = submitListToMeditationsAdapter
@@ -31,6 +37,9 @@ class DashboardViewModel : ViewModel() {
     val bannerVisibilityObservable = ObservableBoolean()
     val storiesVisibilityObservable = ObservableBoolean()
     val meditationsVisibilityObservable = ObservableBoolean()
+    val mediaTitleObservable = ObservableField<String>()
+    val mediaContentObservable = ObservableField<String>()
+    val mediaDateObservable = ObservableField<String>()
 
     fun getDashboardData() {
         progressBarVisibilityObservable.set(true)
@@ -52,7 +61,6 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun handleDashboardData(dashboardResponse: DashboardResponse) {
-        dashboardData = dashboardResponse
         dashboardResponse.run {
             isBannerEnabled?.let { bannerVisibilityObservable.set(it) }
             meditations?.let {submitListToMeditationsAdapter.value = it }

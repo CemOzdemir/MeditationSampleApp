@@ -1,11 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.e.meditationsampleapp.features.dashboard.DashboardViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_media_detail"
         android:backgroundTint="@color/black"
         android:backgroundTintMode="add">
+
+        <ImageView
+            android:id="@+id/play_button"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_play"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/media_title" />
+
+        <TextView
+            android:id="@+id/media_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:text="@{viewModel.mediaTitleObservable}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/play_button"
+            app:layout_constraintBottom_toTopOf="@id/media_content"/>
+
+        <TextView
+            android:id="@+id/media_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:text="@{viewModel.mediaContentObservable}"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/media_title"
+            app:layout_constraintBottom_toTopOf="@id/media_date"
+            tools:text="1,001 Nights, also known as The Thousand and One Nights or Arabian Nights, is a collection of Middle Eastern and South Asian folk tales that were originally published together during the Islamic Golden Age. The stories — from historical tales to tragic romances to comedies — were collected over many centuries by a huge range of scholars and authors. Read below to find ten of the most standout stories."/>
+
+        <TextView
+            android:id="@+id/media_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:text="@{viewModel.mediaDateObservable}"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:background="@drawable/bg_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/media_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="02/25/2021, Thu"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
